@@ -1,0 +1,216 @@
+<div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ GEZGİN ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5 class="m-b-10">Genel Bakış</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href= {% url "home" %} ><i
+                                                        class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href= {% url "report_list" %} >Raporlar</a></li>
+                                            <li class="breadcrumb-item"><a href=""> {{report.name}} </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] start -->
+<div class="row">
+    <!-- [ SOL MENU ] start -->
+    <div class="col-xl-4 col-lg-12 task-detail-right">
+
+        <!-- TEMEL AKSİYON  -->
+        {% if user.role.indexName == "yetkili" %}
+        <div class="card">
+            <div class="d-flex justify-content-around">
+
+                <div class="btn btn-secondary w-50 m-1 card-body" id="revize" data-object-id="{{ report.id }}" data-object-name="{{ status.revize.id }}">
+                    <div class="text-center">
+                        <h4 class="text-white m-0">Revize</h4>
+                    </div>
+                </div>
+
+                <div class="btn btn-primary w-50 m-1 card-body" id="onayla" data-object-id="{{ report.id }}" data-object-name="{{ status.onaylandi.id }}">
+                    <div class="text-center">
+                        <h4 class="text-white m-0">Onayla</h4>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        {% else %}
+
+            <div class="card">
+
+                    <div class="btn btn-primary m-1 card-body" id="onay_bekliyor" data-object-id="{{ report.id }}" data-object-name="{{ status.onay_bekliyor.id }}">
+                        <div class="text-center">
+                            <h4 class="text-white m-0">Onaya Gönder</h4>
+                        </div>
+                    </div>
+                
+            </div>
+        
+        
+        {% endif %}
+
+        <!-- Yazar  -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Yazar</h5>
+            </div>
+            <div class="card-body user-box assign-user">
+                <div class="d-flex">
+                    <div class="media-left media-middle me-3">
+                        <a href="#!">
+                            <img class="img-fluid img-radius"
+                            src="{{ request.scheme }}://{{request.get_host}}/media/{{report.writer.picture}}" alt="chat-user">
+                        </a>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6> {{report.writer}}  </h6>
+                        <p> {{report.writer.email}} </p>
+                    </div>
+                    <div>
+                        <a href="#!" class="text-muted"> <i
+                                class="icon-options-vertical"></i></a>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <!-- TEMEL BİLGİLER  -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Rapor Detayları</h5>
+            </div>
+            <div class="card-body task-details">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-adjust m-r-5"></i> Görev:</td>
+                            <td class="text-end"><span class="float-end"><a
+                                        class="text-secondary" href=" {% url "work_details" report.relatedWork.slug %} "> {{report.relatedWork}} </a></span></td>
+                        </tr>
+                        <tr>
+                            <td><i class="far fa-calendar-alt m-r-5"></i> Görev Durumu:</td>
+                            <td class="text-end"> <span class="badge text-bg-secondary">{{ report.status }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><i class="far fa-credit-card m-r-5"></i> Görev Son Tarihi:</td>
+                            <td class="text-end"> {{report.relatedWork.deadline}} </td>
+                        </tr>                        
+                        <tr>
+                            <td><i class="fas fa-user-plus m-r-5"></i> Görevlendiren:</td>
+                            <td class="text-end"><a class="text-secondary" href="#!"> {{report.relatedWork.appointer}} </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+        <!-- GÖREVLİLER  -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Diğer Görevliler</h5>
+            </div>
+            <div class="card-body user-box assign-user">
+                {% for appointed in report.relatedWork.appointed.all   %}
+                    {% if appointed != report.writer %}
+                    <div class="d-flex">
+                        <div class="media-left media-middle me-3">
+                            <a href="#!">
+                                <img class="img-fluid img-radius"
+                                src="{{ request.scheme }}://{{request.get_host}}/media/{{appointed.picture}}" alt="chat-user">
+                            </a>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6> {{appointed.first_name}} {{appointed.last_name}}  </h6>
+                            <p> {{appointed.email}} </p>
+                        </div>
+                        <div>
+                            <a href="#!" class="text-muted"> <i
+                                    class="icon-options-vertical"></i></a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- [ SAĞ SAYFA ] start -->
+    <div class="col-xl-8 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-3"><i class="fas fa-ticket-alt m-r-5"></i> {{report.name}} </h5>
+                <button class="btn btn-primary btn-sm float-end btf"><i
+                        class="far fa-bell m-r-5"></i>Check in</button>
+            </div>
+            <div class="card-body">
+                <div class="m-b-20">
+                    <h6>Rapor</h6>
+                    <hr>
+                    <p> {{report.description}} </p>
+                </div>
+                {% if report.img %}
+                
+                <div class="m-b-20">
+                    <h6>Görseller</h6>
+                    <hr>
+                    <img src="{{ request.scheme }}://{{request.get_host}}/media/{{report.img}}" alt="" class="img-fluid">
+                    
+                </div>
+                
+                {% endif %}
+                
+               
+                <div class="m-b-20">
+                    <h6>Göreve Yazılan Diğer Raporlar</h6>
+                    <hr>
+
+                    <div class="row">
+                        {% for otherReport in reports  %}
+                    
+                            {% if otherReport.relatedWork == report.relatedWork %}
+                            
+                                {% if otherReport != report %}
+                                
+                                    {% include "partials\reportDetail\reportItem.html" %}
+                                
+                                {% endif %}
+
+                            {% endif %}
+
+                    {% endfor %}
+                    </div>
+
+
+                </div>               
+            </div>
+        </div>
+    </div>
+
+    <!-- [ task-detail-right ] end -->
+</div>
+
+<!-- [ Main Content ] end -->
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "partials/reportDetail/modals/create_revise.html" %}
+

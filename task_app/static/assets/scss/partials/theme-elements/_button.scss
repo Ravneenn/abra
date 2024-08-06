@@ -1,0 +1,218 @@
+@import "../mixins/buttons";
+/**  =====================
+      Button css start
+==========================  **/
+.btn-show{
+    --bs-btn-active-bg :  #{$primary-color};
+    --bs-btn-active-border-color : #{$primary-color};
+}
+.btn-close{
+    --bs-btn-close-focus-shadow: none;
+} 
+.btn-primary{
+    --bs-btn-hover-bg : #{$primary-color};
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #{$primary-color};
+    --bs-btn-border-color: #{$primary-color};
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #{darken($primary-color, 5%)};
+    --bs-btn-hover-border-color: #{darken($primary-color, 5%)};
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #{darken($primary-color, 5%)};
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #{darken($primary-color, 5%)};
+    --bs-btn-disabled-border-color: #{darken($primary-color, 5%)};
+}
+.btn-outline-primary{
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #{darken($primary-color, 5%)};
+    --bs-btn-active-border-color: #{darken($primary-color, 5%)};
+}
+.btf-check:checked+.btf, .btf.active, .btf.show, .btf:first-child:active, :not(.btf-check)+.btf:active{
+    --bs-btn-active-bg: #{$primary-color};
+    --bs-btn-active-border-color: #{$primary-color};
+}
+.btn {
+    border-radius: 0.25rem;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    transition: all 0.3s ease-in-out;
+    --bs-btn-padding-y: 10px;
+    --bs-btn-padding-x: 20px;
+    --bs-btn-font-size: 14px;
+
+    > i {
+        margin-right: 12px;
+    }
+
+    &-square {
+        border-radius: 0;
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+    }
+
+    &-rounded {
+        border-radius: 30px;
+    }
+
+    .spinner-border {
+        margin-right: 5px;
+    }
+}
+
+.dropdown-toggle::after {
+    top: 3px;
+    left: 8px;
+    position: relative;
+}
+
+.dropdown-toggle-split {
+    padding: 8px 10px;
+
+    &:after {
+        left: 0;
+    }
+}
+
+.btn-icon,
+.drp-icon {
+    width: 40px;
+    height: 40px;
+    padding: 10px 12px;
+
+    > i {
+        margin-right: 0;
+    }
+}
+
+.drp-icon {
+    &.dropdown-toggle:after {
+        display: none;
+    }
+
+    +.dropdown-menu {
+        margin-left: -10px;
+    }
+}
+
+.btn-lg {
+    padding: 12px 25px;
+    border-radius: 0.35rem;
+}
+
+.btn-sm {
+    padding: 3px 12px;
+    border-radius: 0.15rem;
+}
+
+.btn-group,
+.btn-group-vertical {
+    .btn {
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+}
+
+.shadow-1 {
+    box-shadow: 0 7px 12px 0 rgba(62,57,107,.16);
+}
+
+.shadow-2 {
+    box-shadow: 0 10px 18px 0 rgba(62,57,107,.2);
+}
+
+.shadow-3 {
+    box-shadow: 0 14px 24px 0 rgba(62,57,107,.26);
+}
+
+.shadow-4 {
+    box-shadow: 0 16px 28px 0 rgba(62,57,107,.3);
+}
+
+.shadow-5 {
+    box-shadow: 0 20px 24px 0 rgba(62,57,107,.36);
+}
+
+/* Alternate buttons */
+@each $color, $value in $theme-colors {
+    $i: index($theme-colors, $value);
+
+    .btn-#{$color} {
+        @include button-variant($value, $value);
+    }
+}
+.btn-info, .btn-warning{
+    color: #fff !important;
+}
+/* outline buttons */
+@each $color, $value in $theme-colors {
+    .btn-outline-#{$color} {
+        @include button-outline-variant($value);
+    }
+}
+/* glow buttons */
+@each $color, $value in $theme-colors {
+    .btn-glow-#{$color} {
+        @include button-glow-variant($value);
+    }
+}
+/* Gradient */
+@each $color, $value in $theme-colors {
+    .btn-gradient-#{$color} {
+        @include button-gradient-variant($value, $value,$scol: map-get($theme-colors-gt,$color));
+    }
+}
+/**====== Button css end ======**/
+/*====== Social button css starts ======*/
+@each $value in $social-name {
+    $i: index($social-name, $value);
+
+    .btn-#{$value} {
+        background: nth($social-color,$i);
+        border-color: nth($social-color,$i);
+        color: #fff;
+
+        &:hover,
+        &:not(:disabled):not(.disabled).active,
+        &:not(:disabled):not(.disabled):active,
+        .show > &.dropdown-toggle {
+            color: #fff;
+            background: lighten(nth($social-color,$i), 5%);
+        }
+    }
+}
+/*====== Social button css end ======*/
+/*====== light badge css start ======*/
+@each $color, $value in $theme-colors {
+    .badge-light-#{$color} {
+        @include badge-light-variant($value);
+    }
+}
+/*====== light badge css end ======*/
+
+  .bs-tooltip-top .tooltip-arrow::before,
+  .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+      margin-top: -5px;
+  }
+  .bs-tooltip-end .tooltip-arrow::before,
+  .bs-tooltip-auto[data-popper-placement^=right] .tooltip-arrow::before {
+    margin-right: -3px;
+  }
+  .bs-tooltip-bottom .tooltip-arrow::before,
+  .bs-tooltip-auto[data-popper-placement^=bottom] .tooltip-arrow::before {
+    margin-bottom: -5px;
+  }
+  .bs-tooltip-start .tooltip-arrow::before,
+  .bs-tooltip-auto[data-popper-placement^=left] .tooltip-arrow::before {
+    margin-left: -3px;
+  }
+.radio-button{
+    opacity: 0;
+    position: absolute;
+}

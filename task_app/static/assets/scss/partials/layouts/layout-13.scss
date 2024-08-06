@@ -1,0 +1,69 @@
+@import "../variables";
+/**  =====================
+     layout-13 css start
+==========================  **/
+/* menu[ layout-13 ] css start */
+body {
+    &.layout-13 {
+        .pcoded-main-container {
+            &:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 130px;
+                left: 0;
+                top: -1px;
+                z-index: 1;
+                background: $header-light-background;
+                box-shadow: inset 0 -1px 4px 0 rgba(63, 77, 103, 0.15);
+            }
+
+            .pcoded-wrapper {
+                position: relative;
+                z-index: 3;
+            }
+        }
+
+        .pcoded-navbar {
+            .navbar-content {
+                box-shadow: none;
+            }
+
+            &[class*="navbar-"] {
+                ~.pcoded-main-container {
+                    .page-header {
+                        .breadcrumb-item+.breadcrumb-item::before,
+                        .page-header-title + .breadcrumb > .breadcrumb-item a {
+                            color: rgba(255,255,255,0.8);
+                        }
+
+                        .page-header .page-header-title + .breadcrumb > .breadcrumb-item:last-child a,
+                        h5 {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+            @each $value in $color-menu-name {
+                $i: index($color-menu-name, $value);
+
+                &.navbar-#{$value} ~.pcoded-main-container:after {
+                    background: nth($color-menu-color,$i);
+                }
+            }
+        }
+        @media only screen and (max-width: 992px) {
+            .pcoded-navbar {
+                &.mob-open {
+                    ~ .pcoded-header,
+                    ~ .pcoded-main-container {
+                        &:before {
+                            z-index: 5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-13 ] css end */

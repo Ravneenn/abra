@@ -1,0 +1,144 @@
+@import "../variables";
+/**  =====================
+     layout-6/7 css start
+==========================  **/
+/* menu[ layout-6/7 ] css start */
+
+body {
+    &.layout-6 {
+        .pcoded-navbar.theme-horizontal ~ .pcoded-header .mobile-menu.on span {
+            background: transparent;
+        }
+    }
+
+    &.layout-6,
+    &.layout-7 {
+        .pcoded-header .m-header .mobile-menu#show-toggle {
+            right: 60px;
+        }
+
+        .pcoded-navbar {
+            &.theme-horizontal {
+                ~ .pcoded-header {
+                    .m-header {
+                        position: relative;
+                        width: $Menu-width;
+                        align-self: stretch;
+                    }
+
+                    &[class*="header-"] {
+                        .mobile-menu span {
+                            background: #fff;
+
+                            &:after,
+                            &:before {
+                                background: #fff;
+                            }
+                        }
+                    }
+
+                    .mobile-menu {
+                        display: flex;
+
+                        span {
+                            background: $header-light-text-color;
+
+                            &:after,
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                left: 0;
+                                height: 2px;
+                                background-color: $header-light-text-color;
+                                -webkit-transition: all 0.3s;
+                                transition: all 0.3s;
+                                -webkit-backface-visibility: hidden;
+                                backface-visibility: hidden;
+                                border-radius: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .scroll-div.navbar-content {
+                height: 100%;
+            }
+
+            &:not(.theme-horizontal) {
+                position: fixed;
+                top: 0;
+                left: -#{$Menu-width};
+                @media only screen and (max-width: 991px) {
+                    position: absolute;
+
+                    .navbar-content {
+                        box-shadow: none;
+                    }
+                }
+
+                &.mob-open {
+                    left: 0;
+
+                    ~ .pcoded-navbar.theme-horizontal {
+                        &:before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0,0,0,0.2);
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+        }
+        @media only screen and (max-width: 992px) {
+            .pcoded-navbar.mob-open-h {
+                margin-left: 0;
+                left: 0;
+                width: 100%;
+                top: $header-height;
+                height: calc(100vh - #{$header-height});
+            }
+        }
+    }
+
+    &.layout-7 {
+        .pcoded-navbar {
+            &.theme-horizontal {
+                width: calc(100% - #{$Menu-width});
+                margin-left: $Menu-width;
+
+                ~ .pcoded-header {
+                    width: calc(100% - #{$Menu-width});
+                    margin-left: $Menu-width;
+
+                    .m-header {
+                        display: none;
+                    }
+                }
+
+                ~ .pcoded-main-container {
+                    margin-left: $Menu-width;
+                }
+            }
+
+            &:not(.theme-horizontal) {
+                left: 0;
+
+                &.navbar-collapsed {
+                    ~ .pcoded-header,
+                    ~ .pcoded-main-container,
+                    ~ .theme-horizontal {
+                        margin-left: $Menu-collapsed-width;
+                        width: calc(100% - #{$Menu-collapsed-width});
+                    }
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-6/7 ] css end */

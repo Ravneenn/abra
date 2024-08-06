@@ -1,0 +1,52 @@
+<!-- vendor css -->
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+{% if layouts == 'horizontal' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-horizontal.css' %}">
+{% endif %}
+{% if bodyclass == 'box-layout' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-box.css' %}">
+{% endif %}
+{% if sublayouts == 'layout1' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-1.css' %}">
+{% endif %}
+{% if sublayouts == 'layout2' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-2.css' %}">
+{% endif %}
+{% if sublayouts == 'layout3' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-3.css' %}">
+{% endif %}
+{% if sublayouts == 'layout4' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-4.css' %}">
+{% endif %}
+{% if sublayouts == 'layout5' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-5.css' %}">
+{% endif %}
+{% if sublayouts == 'layout6' or sublayouts == 'layout7' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-6-7.css' %}">
+{% endif %}
+{% if sublayouts == 'layout8' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-8.css' %}">
+{% endif %}
+{% if sublayouts == 'layout9' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-9.css' %}">
+{% endif %}
+{% if sublayouts == 'layout11' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-11.css' %}">
+{% endif %}
+{% if sublayouts == 'layout12' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-12.css' %}">
+{% endif %}
+{% if sublayouts == 'layout13' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-13.css' %}">
+{% endif %}
+{% if sublayouts == 'layout14' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/layout-14.css' %}">
+{% endif %}
+{% if darktheme == 'true' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/dark.css' %}">
+{% endif %}
+{% if rtltheme == 'true' %}
+<link rel="stylesheet" href="{% static 'assets/css/layouts/rtl.css' %}">
+{% endif %}

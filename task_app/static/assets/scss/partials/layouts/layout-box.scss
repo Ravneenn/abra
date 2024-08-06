@@ -1,0 +1,41 @@
+@import "../variables";
+/**  =====================
+     box css start
+==========================  **/
+/* ====== [Box start ] ======== */
+
+body.box-layout {
+    position: static;
+    background-image: url("../../images/bg-images/5.jpg");
+    background-size: auto;
+    background-attachment: fixed;
+
+    .pcoded-header {
+        position: relative;
+
+        ~ .pcoded-main-container {
+            padding-top: 0;
+            background: $theme-background;
+        }
+    }
+
+    .pcoded-navbar {
+        position: fixed;
+        align-content: space-around;
+
+        &.theme-horizontal {
+            ~ .pcoded-header {
+                position: relative;
+            }
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        position: relative;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .container {
+        padding: 0;
+    }
+}
+/* ====== [ Box end ] ======== */

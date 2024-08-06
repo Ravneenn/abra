@@ -1,0 +1,76 @@
+<tr data-work-id="{{ work.id }}">
+    <td>
+        <div class="p-3">{{ work.name }}</div>
+    </td>
+    <td>
+        {% if user.role.indexName == "yetkili" %}
+        <div class="form-group form-primary mb-0">
+            <input type="date" name="deadline" class="form-control" value="{{ work.deadline|date:'Y-m-d' }}">
+            <span class="form-bar"></span>
+        </div>
+
+        {% else %}
+
+            <div class="p-3">{{ work.deadline|date:'Y-m-d' }}</div>
+
+        {% endif %}
+    </td>
+    <td>
+
+        {% if user.role.indexName == "yetkili" %}
+        <div class="form-group form-primary mb-0">
+            <select name="status" class="form-control form-control-sm">
+                {% for statue in status %}
+                <option value="{{ statue.id }}" {% if statue == work.status %} selected {% endif %}>{{ statue }}</option>
+                {% endfor %}
+            </select>
+            <span class="form-bar"></span>
+        </div>
+
+        {% else %}
+
+            <div class="p-3">{{ work.status }}</div>
+
+        {% endif %}
+
+
+
+
+
+        
+    </td>
+    <td>
+        {% for appointed in work.appointed.all %}
+            <a href="#!"><img class="img-fluid img-radius" src="{{ request.scheme }}://{{request.get_host}}/media/{{appointed.picture}}" alt=""></a>
+        {% endfor %}
+    </td>
+    <td>
+
+        {% if user.role.indexName == "yetkili" %}
+        <button type="button" class="btn btn-primary btn-icon open-update-modal" data-toggle="modal" data-target="#updateModal" data-work-id="{{ work.id }}" title="Kaydet">
+            <i class="feather icon-save" style="color: white !important;"></i>
+        </button>
+        <button type="button" class="btn btn-secondary btn-icon open-edit-modal" data-toggle="modal" data-work-id="{{ work.id }}" title="Düzenle">
+            <i class="feather icon-edit" style="color: white !important;"></i>
+        </button>
+        <a href={% url "work_details" work.slug %} class="btn btn-info btn-icon" title="Görüntüle">
+            <i class="feather icon-eye" style="color: white !important;"></i>
+        </a>
+        <button type="button" class="btn btn-danger btn-icon open-delete-modal" data-toggle="modal" data-target="#deleteModal" data-work-id="{{ work.id }}" title="Sil">
+            <i class="feather icon-trash" style="color: white !important;"></i>
+        </button>
+
+        {% else %}
+
+        <a href={% url "work_details" work.slug %} class="btn btn-info" title="Görüntüle">
+            <i class="feather icon-eye" style="color: white !important;"></i>Görüntüle
+        </a>
+
+        {% endif %}
+
+
+        
+    </td>
+        
+   
+</tr>

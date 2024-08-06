@@ -1,0 +1,24 @@
+<div class="col-md-6 col-sm-12">
+    <div class="card card-border-c-blue">
+        <div class="card-header">
+            <a href=" {% url "work_details" alterWork.slug %} " class="text-secondary"> {{alterWork.name}} </a>
+            <p class="text-c-info"> {{alterWork.createdAt}} </p>
+        </div>
+        <div class="card-body card-task">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="task-detail"> {{alterWork.description}} </p>
+                    <p class="task-due"><strong> Son Tarih : </strong><strong
+                            class="label label-primary"> {{alterWork.deadline}} </strong></p>
+                </div>
+            </div>
+            <hr>
+            <div class="task-list-table">
+                {% for staff in alterWork.appointed.all %}
+                <a href="#!"><img class="w-25  img-fluid img-radius m-r-5" src="{{ request.scheme }}://{{request.get_host}}/media/{{staff.picture}}" alt="1"></a>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+</div>

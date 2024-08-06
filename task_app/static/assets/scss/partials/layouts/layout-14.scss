@@ -1,0 +1,261 @@
+@import "../variables";
+/**  =====================
+     layout-14 css start
+==========================  **/
+/* menu[ layout-14 ] css start */
+body {
+    &.layout-14 {
+        .navbar-popup {
+            position: absolute;
+            top: $header-height;
+            left: $Menu-width + 15;
+            width: $Menu-width;
+            height: auto;
+            box-shadow: 0 0 15px 0 rgba(69, 90, 100, 0.09);
+            display: none;
+
+            > .pcoded-submenu {
+                border-radius: 5px;
+                background: $menu-dark-background;
+            }
+
+            &:after {
+                content: "\6a";
+                position: absolute;
+                top: 8px;
+                left: -31px;
+                font-family: "pct";
+                z-index: 1001;
+                font-size: 50px;
+                line-height: 1;
+                color: $menu-dark-background;
+                width: 40px;
+                height: 100%;
+                text-shadow: -8px 0 13px rgba(62, 57, 107, 0.08);
+                display: flex;
+                align-items: flex-start;
+            }
+
+            &.vedge {
+                &:after {
+                    top: -8px;
+                    align-items: flex-end;
+                }
+            }
+        }
+
+        .pcoded-navbar {
+            &.navbar-collapsed {
+                .navbar-popup {
+                    left: $Menu-collapsed-width + 15;
+                }
+
+                &:hover {
+                    ~ .pcoded-header,
+                    ~ .pcoded-main-container {
+                        &:before {
+                            display: none;
+                        }
+                    }
+
+                    .navbar-brand {
+                        .b-brand {
+                            display: none;
+                        }
+
+                        .mobile-menu {
+                            right: auto;
+                            left: 20px;
+                            transition-delay: 0s;
+
+                            span {
+                                background: transparent;
+                            }
+                        }
+                    }
+
+                    .mobile-menu {
+                        span {
+                            background-color: transparent;
+
+                            &:after,
+                            &:before {
+                                height: 2px;
+                                width: 100%;
+                            }
+
+                            &:before {
+                                transform: rotate(45deg) translate(4px, 4px);
+                            }
+
+                            &:after {
+                                transform: rotate(-45deg) translate(3px, -3px);
+                            }
+                        }
+                    }
+                    width: $Menu-collapsed-width !important;
+                    height: 100%;
+                    transition: all 0.3s ease-in-out;
+
+                    .header-logo {
+                        width: $Menu-collapsed-width;
+                        padding: 10px 20px;
+
+                        img {
+                            transform: rotateY(-90deg);
+                            transform-origin: 0 0;
+                            opacity: 0;
+                            transition: unset;
+                        }
+
+                        .logo-thumb {
+                            transform: rotateY(0deg);
+                            transform-origin: 0 0;
+                            opacity: 1;
+                            left: calc((#{$Menu-collapsed-width} / 2) - 20px);
+                        }
+                    }
+
+                    .navbar-content {
+                        &.ps {
+                            overflow: visible;
+                        }
+                    }
+
+                    .pcoded-menu-caption {
+                        position: relative;
+                        width: 100%;
+                        height: auto;
+                        white-space: nowrap;
+                        overflow: hidden;
+
+                        > label {
+                            transform: rotateY(-90deg);
+                            transform-origin: 0 0;
+                            opacity: 0;
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            top: 32px;
+                            left: 15px;
+                            width: calc(100% - 30px);
+                            height: 1px;
+                            background: transparentize($menu-dark-text-color,0.5);
+                        }
+                    }
+
+                    .pcoded-inner-navbar {
+                        > li {
+                            > a {
+                                padding: 7px 20px;
+
+                                > .pcoded-micon + .pcoded-mtext {
+                                    position: absolute;
+                                    top: 11px;
+                                }
+
+                                > .pcoded-mtext {
+                                    transform: rotateY(-90deg);
+                                    transform-origin: 0 0;
+                                    opacity: 0;
+                                    transition: all 0.3s ease-in-out;
+                                }
+                            }
+
+                            &.pcoded-hasmenu {
+                                > a {
+                                    &:after {
+                                        right: 12px;
+                                    }
+                                }
+
+                                .pcoded-submenu {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        > li {
+                            &.pcoded-trigger {
+                                .pcoded-submenu {
+                                    &:after {
+                                        content: "";
+                                        position: absolute;
+                                        top: 50px;
+                                        left: calc(calc(#{$Menu-collapsed-width} / 2) + 2px);
+                                        width: 1px;
+                                        height: calc(100% - 50px);
+                                        background: transparentize($menu-dark-text-color,0.8);
+                                    }
+
+                                    li {
+                                        a {
+                                            color: transparent;
+                                            white-space: nowrap;
+                                        }
+                                    }
+
+                                    .pcoded-submenu {
+                                        li {
+                                            a:before {
+                                                opacity: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    ~ .pcoded-header {
+                        width: calc(100% - #{$Menu-collapsed-width});
+                    }
+
+                    ~ .pcoded-header,
+                    ~ .pcoded-main-container {
+                        margin-left: $Menu-collapsed-width;
+                    }
+
+                    .pcoded-badge {
+                        transform: rotateX(-90deg);
+                        transform-origin: 50% 50%;
+                        opacity: 0;
+                        display: none;
+                        transition: all 0.15s ease-in-out;
+                    }
+                }
+            }
+
+            &.menu-light {
+                .navbar-popup {
+                    > .pcoded-submenu {
+                        background: $menu-light-background;
+                    }
+
+                    &:after {
+                        color: $menu-light-background;
+                    }
+                }
+            }
+            @each $value in $color-menu-name {
+                $i: index($color-menu-name, $value);
+
+                &.navbar-#{$value} {
+                    .navbar-popup {
+                        > .pcoded-submenu {
+                            background: nth($color-menu-color,$i);
+                        }
+
+                        &:after {
+                            color: nth($color-menu-color,$i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-14 ] css end */

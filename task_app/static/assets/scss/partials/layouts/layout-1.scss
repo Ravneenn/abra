@@ -1,0 +1,203 @@
+@import "../variables";
+/**  =====================
+     layout-1 css start
+==========================  **/
+/* menu[ layout-1 ] css start */
+
+body {
+    &.layout-1 {
+        .pcoded-navbar {
+            .toggle-sidemenu {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                background: darken($menu-dark-background,10%);
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0 5px 0 0;
+            }
+            @media only screen and (max-width: 991px) {
+                .toggle-sidemenu {
+                    display: none;
+                }
+
+                &.mob-open .toggle-sidemenu {
+                    display: flex;
+                }
+            }
+
+            &.navbar-collapsed {
+                .toggle-sidemenu {
+                    display: none;
+                }
+
+                .pcoded-inner-navbar > li.pcoded-trigger .pcoded-submenu li a {
+                    white-space: normal;
+                }
+            }
+
+            .header-logo {
+                padding: 10px 20px;
+            }
+
+            .sidemenu {
+                li {
+                    position: relative;
+
+                    a {
+                        font-size: 22px;
+                        padding: 10px 24px;
+                        position: relative;
+                        cursor: pointer;
+
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            height: 1px;
+                            width: 60%;
+                            left: 20%;
+                            bottom: 0;
+                            border-bottom: 1px solid rgba(181, 189, 202, 0.2);
+                        }
+
+                        span {
+                            display: none;
+                        }
+                    }
+
+                    &:last-child {
+                        a {
+                            &:after {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &.active {
+                        color: nth($color-active-color,1);
+
+                        &:after {
+                            content: "";
+                            background-color: nth($color-active-color,1);
+                            z-index: 1027;
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            width: 3px;
+                            height: 100%;
+                        }
+                    }
+                }
+                box-shadow: inset -1px 0 0 0 transparentize($menu-dark-text-color,0.8);
+            }
+
+            .layout1-nav {
+                display: flex;
+                align-items: stretch;
+                height: auto;
+                min-height: 100%;
+            }
+
+            .side-content {
+                flex: 1 1 0;
+
+                .sidelink {
+                    display: none;
+
+                    &.active {
+                        display: block;
+                    }
+
+                    .pcoded-inner-navbar {
+                        li {
+                            &.pcoded-menu-caption {
+                                font-size: 20px;
+                                padding: 16px 15px 16px 18px;
+
+                                &:after {
+                                    content: "";
+                                    position: absolute;
+                                    height: 1px;
+                                    width: 40px;
+                                    left: 18px;
+                                    bottom: 13px;
+                                    border-bottom: 1px solid rgba(181, 189, 202, 0.2);
+                                }
+                            }
+
+                            &.pcoded-hasmenu {
+                                .pcoded-submenu li > {
+                                    a {
+                                        padding: 7px 7px 7px 40px;
+
+                                        &:before {
+                                            left: 20px;
+                                        }
+                                    }
+
+                                    .pcoded-submenu > li > a {
+                                        padding: 7px 7px 7px 60px;
+
+                                        &:before {
+                                            left: 40px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        > li {
+                            > a {
+                                padding: 12px 10px 12px 20px;
+
+                                .pcoded-micon {
+                                    display: none;
+                                }
+
+                                .pcoded-mtext {
+                                    position: relative;
+                                    top: 0;
+                                }
+                            }
+
+                            &.active,
+                            &.pcoded-trigger {
+                                &:after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.hide-sidemenu {
+                .sidemenu {
+                    position: absolute;
+                    left: -#{$Menu-collapsed-width};
+                }
+
+                .toggle-sidemenu i {
+                    transform: rotate(180deg);
+                }
+            }
+
+            &.menu-light {
+                .toggle-sidemenu {
+                    background: #f1f1f1;
+                }
+            }
+        }
+
+        &.box-layout {
+            .pcoded-navbar .toggle-sidemenu {
+                display: none;
+            }
+        }
+    }
+}
+/* menu [ layout-1 ] css end */

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block js_files %}
+
+<script src=" {% static "assets/js/myScript/workList/editingWork.js" %} "></script>
+<script src=" {% static "assets/js/myScript/workList/createWork.js" %} "></script>
+<script src=" {% static "assets/js/myScript/workList/deleteWork.js" %} "></script>
+<script src=" {% static "assets/js/myScript/workList/updateWork.js" %} "></script>
+
+
+{% endblock  %}
+
+
+{% block css_files %}
+
+<meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" href=" {% static 'assets/plugins/modal-window-effects/css/md-modal.css' %} ">
+<link rel="stylesheet" href="{% static 'assets/plugins/data-tables/css/datatables.min.css' %}">
+
+{% endblock  %}
+
+
+    
+
+
+    {% block content %}
+    
+    <section class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Breadcrumb ] başlangıç -->
+                            <div class="page-header">
+                                <div class="page-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12">
+                                            <div class="page-header-title">
+                                                <h5 class="m-b-10">Görev Listesi</h5>
+                                            </div>
+                                            <ul class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                                <li class="breadcrumb-item"><a href="#!">Görev</a></li>
+                                                <li class="breadcrumb-item"><a href="#!">Görev Listesi</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Breadcrumb ] bitiş -->
+
+                            <!-- [ Ana İçerik ] başlangıç -->
+                            <div class="row">
+                                <!-- [ Görev Listesi ] başlangıç -->
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header row justify-content-between align-items-center">
+                                            <h5 class="col-auto" >Görev Listesi</h5>
+                                            {% if user.role.indexName == "yetkili" %}<button class="btn btn-success md-trigger col-auto" data-modal="modal-16">Görev Oluştur</button>{% endif %}
+                                        </div>
+                                        <div class="card-body task-data">
+                                            <div class="table-responsive form-material">
+                                                <table id="simpletable" class="table dt-responsive task-list-table table-striped table-bordered nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Görev Adı</th>
+                                                            <th>Son Tarih</th>
+                                                            <th>Durum</th>
+                                                            <th>Görevliler</th>
+                                                            <th style ="width: 150px;">İşlemler</th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="task-page">
+                                                        {% if user.role.indexName == "yetkili" %}
+                                                        
+                                                            {% for work in works %}
+                                                                {% include "partials/workList/workRow.html" %}
+                                                            {% endfor %}
+
+                                                        {% else %}
+
+                                                            {% for work in works %}
+                                                                {% if user in work.appointed.all %}
+                                                                    {% include "partials/workList/workRow.html" %}
+                                                                {% endif %}
+                                                            {% endfor %}     
+                                                        
+                                                        {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ Görev Listesi ] bitiş -->
+                            </div>
+                            <!-- [ Ana İçerik ] bitiş -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        
+        
+        
+    </section>
+
+    {% include "partials/workList/processModals.html" %}
+    {% include "partials/workList/detailCreateModal.html" %}
+    <script src="{% static 'assets/js/myScript/home.js' %}"></script>
+    <script src=" {% static 'assets/plugins/modal-window-effects/js/classie.js' %}"></script>
+    <script src=" {% static 'assets/plugins/modal-window-effects/js/modalEffects.js' %}"></script>
+    {% endblock  %}
+
+    
+
+
+    
+
+
+    

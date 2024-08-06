@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block js_files %}
+
+<script src=" {% static "assets/js/myScript/workDetails/workDetails.js" %} "></script>
+
+
+{% endblock  %}
+
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static 'assets/plugins/data-tables/css/datatables.min.css' %}">
+
+{% endblock  %}
+
+
+
+
+
+{% block content %}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ GEZGİN ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5 class="m-b-10">Genel Bakış</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href= {% url "home" %} ><i
+                                                        class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href= {% url "work_list" %} >Görevler</a></li>
+                                            <li class="breadcrumb-item"><a href=""> {{work.name}} </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] start -->
+<div class="row">
+    <!-- [ SOL MENU ] start -->
+    <div class="col-xl-4 col-lg-12 task-detail-right">
+        <!-- TEMEL AKSİYON  -->
+        <div class="card">
+            {% include "dynamic/workDetails/top-left-action.html" %}
+        </div>
+        <!-- TEMEL BİLGİLER  -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Görev Detayları</h5>
+            </div>
+            <div class="card-body task-details">
+                <table class="table">
+                    <tbody>
+                        
+                        {% if work.relatedWork %}
+                            <tr>
+                                <td><i class="fas fa-adjust m-r-5"></i> Üst Görev</td>
+                                <td class="text-end"><span class="float-end"><a
+                                            class="text-secondary" href=" {% url "work_details" work.relatedWork.slug %} "> {{work.relatedWork}} </a></span></td>
+                            </tr>
+                        {% endif %}
+
+                        <tr>
+                            <td><i class="far fa-calendar-alt m-r-5"></i> Son Tarih:</td>
+                            <td class="text-end"> {{work.deadline}} </td>
+                        </tr>
+                        <tr>
+                            <td><i class="far fa-credit-card m-r-5"></i> Oluşturma Tarihi:</td>
+                            <td class="text-end"> {{work.createdAt}} </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><i class="fas fa-user-plus m-r-5"></i> Görevlendiren:</td>
+                            <td class="text-end"><a class="text-secondary" href="#!"> {{work.appointer}} </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-thermometer-half m-r-5"></i> Durum:</td>
+                            <td class="text-end"> {{work.status}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% if user.role.indexName == "yetkili" %}
+                <div>
+                    <div class="btn-group d-inline-block">
+                        <button class="btn  btn-primary dropdown-toggle "
+                            type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> İşlemler </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item open-edit-modal" data-toggle="modal" data-target="#editModal" data-work-id="{{ work.id }}" >Düzenle</a>
+                            <a class="dropdown-item text-c-red open-delete-modal" data-toggle="modal" data-target="#deleteModal" data-work-id="{{ work.id }}" >Sil</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- GÖREVLİLER  -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Görevliler</h5>
+            </div>
+            <div class="card-body user-box assign-user">
+                {% for appointed in work.appointed.all   %}
+                <div class="d-flex">
+                    <div class="media-left media-middle me-3">
+                        <a href="#!">
+                            <img class="img-fluid img-radius"
+                            src="{{ request.scheme }}://{{request.get_host}}/media/{{appointed.picture}}" alt="chat-user">
+                        </a>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6> {{appointed.first_name}} {{appointed.last_name}}  </h6>
+                        <p> {{appointed.email}} </p>
+                    </div>
+                    <div>
+                        <a href="#!" class="text-muted"> <i
+                                class="icon-options-vertical"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- [ SAĞ SAYFA ] start -->
+    <div class="col-xl-8 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-3"><i class="fas fa-ticket-alt m-r-5"></i> {{work.name}} </h5>
+                <button class="btn btn-primary btn-sm float-end btf"><i
+                        class="far fa-bell m-r-5"></i>Check in</button>
+            </div>
+            <div class="card-body">
+                <div class="m-b-20">
+                    <h6>Açıklama</h6>
+                    <hr>
+                    <p> {{work.description}} </p>
+                </div>
+                <div class="m-b-20">
+                    <h6>Görseller</h6>
+                    <hr>
+                    <img src="{{ request.scheme }}://{{request.get_host}}/media/{{work.img}}" alt="" class="img-fluid">
+                    
+                </div>
+                
+                <div class="m-b-20">
+                    <h6>Alt Görevler</h6>
+                    <hr>
+
+                    <div class="row">
+
+                        {% for alterWork in works  %}
+                    
+                            {% if alterWork.relatedWork == work %}
+                            
+                                {% if user.role.indexName == "yetkili" %}
+
+                                    {% include "partials/workDetails/relatedWorks.html" %}
+
+                                {% else %}
+
+                                    {% if user in alterWork.appointed.all %}
+                                    
+                                        {% include "partials/workDetails/relatedWorks.html" %}
+                                    
+                                    {% endif %}
+                                    
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+                <div class="m-b-20">
+                    <h6>Raporlar</h6>
+                    <hr>
+
+                    <div class="row">
+                        {% for report in reports  %}
+                    
+                            {% if report.relatedWork == work %}
+                            
+                                {% if user.role.indexName == "yetkili" %}
+                                
+                                        {% include "partials\workDetails\reportItem.html" %}
+
+                                    {% else %}
+
+                                        {% if user == report.writer %}
+                                        
+                                            {% include "partials\workDetails\reportItem.html" %}
+
+                                        {% endif %}
+
+                                {% endif %}
+
+                            {% endif %}
+
+                    {% endfor %}
+                    </div>
+
+
+                </div>               
+            </div>
+        </div>
+    </div>
+
+    <!-- [ task-detail-right ] end -->
+</div>
+<!-- [ Main Content ] end -->
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if user.role.indexName == "yetkili" %}
+    {% include "partials/workDetails/modals/createRelatedWork.html" %}
+    {% include "partials\workList\processModals.html" %}
+{% else %}
+    {% include "partials\reportList\modals\createReportModal.html" %}
+
+{% endif %}
+
+
+
+
+
+
+{% endblock  %}

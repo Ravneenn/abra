@@ -1,0 +1,103 @@
+{% load description_truncate %}
+{% load title_truncate %}
+
+    
+{% if user.role.indexName == "yetkili" %}
+<!--YEKİLİ ABİLERİN CARDLARI-->
+
+<div id="report-{{ otherReport.id }}" class="col-md-6 col-sm-12 report-item">
+    <div class="card card-border-c-blue">
+        <div class="card-header better-card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                <a href="{% url 'work_details' otherReport.slug %}" class="text-secondary display-6">{{ otherReport.name}}</a>
+                <br>
+                <p class="badge text-bg-secondary">{{ otherReport.status }}</p>
+                <a class="text-c-info">{{ otherReport.relatedWork.appointer }}'a yazıldı.</a>
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="card-body card-task">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="task-detail"> {{otherReport.description|truncate_if_long}} </p>
+                </div>
+            </div>
+            <hr>
+            <div class="task-list-table">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="task-due"><strong>Görev:</strong>
+                            <a href=" {% url "work_details" otherReport.relatedWork.slug %} " class="text-c-blue">{{otherReport.relatedWork}}</a></p>
+                        <p class="task-due"><strong>Gönderen:</strong>
+                            <strong class="text-c-blue">{{otherReport.writer}}</strong></p>
+                    </div>
+                   
+            </div>
+                    
+                </div>
+
+                
+
+
+
+
+
+
+
+                
+                    
+                
+
+            
+        </div>
+    </div>
+</div>   
+
+{% else %}
+<!--YEKİLİ OLMAYANLARIN CARDLARI-->
+
+    <div id="report-{{ otherReport.id }}" class="col-md-6 col-sm-12 report-item">
+        <div class="card card-border-c-blue">
+            <div class="card-header better-card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                    <a href="{% url 'work_details' otherReport.slug %}" class="text-secondary display-6">{{ otherReport.name }}</a>
+                    <br>
+                    <p class="badge text-bg-secondary">{{ otherReport.status }}</p>
+                    <a class="text-c-info">{{ otherReport.relatedWork.appointer }}'a yazıldı.</a>
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+            <div class="card-body card-task">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="task-detail"> {{otherReport.description|truncate_if_long}} </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="task-list-table">
+                    <p class="task-due"><strong>Görev:</strong>
+                        <a href=" {% url "work_details" otherReport.relatedWork.slug %} " class="text-c-blue">{{otherReport.relatedWork}}</a></p>
+                    <p class="task-due"><strong>Gönderen:</strong>
+                        <strong class="text-c-blue">{{otherReport.writer}}</strong></p>
+                </div>
+                    
+
+                
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+
+
+
+

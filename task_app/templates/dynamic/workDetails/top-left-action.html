@@ -1,0 +1,17 @@
+{% if user.role.indexName == "yetkili" %}
+
+    <div class="btn btn-primary w-100 card-body" id = "start-create-relatedWork" data-object-id="{{ work.id }}" data-object-name="{{ work.name }}" >
+        <div class="text-center">
+            <h4 class="text-white m-0"> Alt Görev Oluştur  </h4>
+        </div>
+    </div>
+
+{% elif user.role.indexName == "personel"  %}
+
+    <div class="btn btn-primary w-100 card-body" id = "start-create-report" data-object-id="{{ work.id }}" data-object-name="{{ work.name }}">
+        <div class="text-center">
+            <h4 class="text-white m-0"> Rapor oluştur  </h4>
+        </div>
+    </div>
+
+{% endif %}

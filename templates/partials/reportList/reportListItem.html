@@ -1,0 +1,133 @@
+{% load description_truncate %}
+{% load title_truncate %}
+
+{% if user.role.indexName == "yetkili" %}
+<!--YEKİLİ ABİLERİN CARDLARI-->
+
+    {% for report in reports%}
+
+        <div id="report-{{ report.id }}" class="col-md-6 col-sm-12 report-item">
+            <div class="card card-border-c-blue">
+                <div class="card-header better-card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                        <a href="{% url 'report_details' report.slug %}" class="text-secondary display-6">{{ report.name|title_if_long }}</a>
+                        <br>
+                        <p class="badge text-bg-secondary">{{ report.status }}</p>
+                        <a class="text-c-info">{{ report.relatedWork.appointer }}'a yazıldı.</a>
+                        </div>
+                        <div>
+                            <div class="d-flex flex-column">
+                                <div class="btn btn-secondary d-flex align-items-center justify-content-center mb-2" id="start-update" data-object-id="{{ report.id }}">
+                                <i class="feather icon-edit mr-2"></i> Düzenle
+                                </div>
+                                <button class="btn btn-danger d-flex align-items-center justify-content-center" id="start-delete" data-object-id="{{ report.id }}"> 
+                                    <i class="feather icon-trash mr-2"></i> Sil
+                                </button> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="card-body card-task">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="task-detail"> {{report.description|truncate_if_long}} </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="task-list-table">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="task-due"><strong>Görev:</strong>
+                                    <a href=" {% url "report_details" report.relatedWork.slug %} " class="text-c-blue">{{report.relatedWork}}</a></p>
+                                <p class="task-due"><strong>Gönderen:</strong>
+                                    <strong class="text-c-blue">{{report.writer}}</strong></p>
+                            </div>
+                            <div class="form-group form-primary mb-0">
+                                <select name="status" id="workStatus" data-object-id="{{ report.id }}" class="form-control form-control-sm">
+                                    {% for statue in status %}
+                                    <option value="{{ statue.id }}" {% if statue == report.status %} selected {% endif %}>{{ statue }}</option>
+                                    {% endfor %}
+                                </select>
+                                <span class="form-bar"></span>
+                            </div>
+                    </div>
+                            
+                        </div>
+
+                        
+
+
+
+
+
+
+
+                        
+                            
+                        
+
+                    
+                </div>
+            </div>
+        </div>  
+
+    {% endfor %}
+
+{% else %}
+<!--YEKİLİ OLMAYANLARIN CARDLARI-->
+
+    {% for report in reports%}
+
+        <div id="report-{{ report.id }}" class="col-md-6 col-sm-12 report-item">
+            <div class="card card-border-c-blue">
+                <div class="card-header better-card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                        <a href="{% url 'report_details' report.slug %}" class="text-secondary display-6">{{ report.name }}</a>
+                        <br>
+                        <p class="badge text-bg-secondary">{{ report.status }}</p>
+                        <a class="text-c-info">{{ report.relatedWork.appointer }}'a yazıldı.</a>
+                        </div>
+                        <div>
+                            <div class="d-flex flex-column">
+                                <div class="btn btn-secondary d-flex align-items-center justify-content-center mb-2" id="start-update" data-object-id="{{ report.id }}">
+                                <i class="feather icon-edit mr-2"></i> Düzenle
+                                </div>
+                                <button class="btn btn-danger d-flex align-items-center justify-content-center" id="start-delete" data-object-id="{{ report.id }}"> 
+                                    <i class="feather icon-trash mr-2"></i> Sil
+                                </button>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="card-body card-task">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="task-detail"> {{report.description|truncate_if_long}} </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="task-list-table">
+                        <p class="task-due"><strong>Görev:</strong>
+                            <a href=" {% url "work_details" report.relatedWork.slug %} " class="text-c-blue">{{report.relatedWork}}</a></p>
+                        <p class="task-due"><strong>Gönderen:</strong>
+                            <strong class="text-c-blue">{{report.writer}}</strong></p>
+                    </div>
+                        
+
+                    
+                </div>
+            </div>
+        </div>  
+
+    {% endfor %}
+
+{% endif %}

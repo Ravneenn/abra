@@ -1,0 +1,56 @@
+/**  =====================
+    28. Notification css start
+========================== **/
+.alert-dismissable .close,
+.alert-dismissible .close {
+  color: inherit;
+  text-shadow: none;
+}
+
+.notifier-container {
+  z-index: 1999;
+  width: 400px;
+  max-width: 98%;
+  top: 15px;
+}
+.notifier {
+  padding: 25px 25px;
+  border-radius:6px;
+  .notifier-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .notifier-body {
+    font-size: 14px;
+  }
+  .notifier-img {
+    .img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .notifier-close {
+    &:focus,
+    &:hover {
+      color: $danger-color;
+      background: transparent;
+    }
+  }
+}
+.notifier {
+  @each $color, $value in $theme-colors {
+    &.#{$color} {
+      border-left-color: $value;
+    }
+  }
+}
+@media (max-width:575px) {  
+  .toast{
+    --bs-toast-max-width: 230px;
+    }
+ }
+
+/**  =====================
+    28. Notification css end
+========================== **/

@@ -1,0 +1,252 @@
+@import "../variables";
+/**  =====================
+     layout-11 css start
+==========================  **/
+/* menu[ layout-11 ] css start */
+body {
+    &.layout-11 {
+        background: #ecf4fb;
+
+        .card {
+            box-shadow: 0 0 15px 0 rgba(69, 90, 100, 0.09);
+        }
+
+        .pcoded-navbar {
+            @media only screen and (min-width: 992px) {
+                background: transparent;
+
+                .navbar-content {
+                    background: $menu-dark-background;
+                    left: 25px;
+                    margin-top: 25px;
+                    box-shadow: 0 0 15px 0 rgba(69, 90, 100, 0.09);
+                }
+
+                ~ .pcoded-main-container {
+                    margin-left: $Menu-width + 25;
+                }
+
+                ~.pcoded-header {
+                    box-shadow: 0 1px 20px 0 rgba(63, 77, 103, 0.15);
+                    $temp: $Menu-width;
+                    width: calc(100% - #{$temp});
+                    margin-left: $temp;
+                }
+            }
+
+            &.menupos-fixed {
+                .scroll-div.navbar-content {
+                    height: calc(100% - 120px);
+                    min-height: calc(100% - 120px);
+                }
+            }
+
+            .header-logo {
+                width: $Menu-width;
+                margin-right: 0;
+                padding: 10px 25px;
+                background: #fff;
+                box-shadow: -10px 1px 20px 0 rgba(63, 77, 103, 0.15);
+
+                .mobile-menu {
+                    transform: rotateY(0deg);
+                    opacity: 1;
+
+                    span {
+                        background-color: transparentize($header-light-text-color,0.2);
+
+                        &:after,
+                        &:before {
+                            background-color: transparentize($header-light-text-color,0.2);
+                        }
+                    }
+
+                    &:hover {
+                        span {
+                            background-color: $header-light-text-color;
+
+                            &:after,
+                            &:before {
+                                background-color: $header-light-text-color;
+                            }
+                        }
+                    }
+
+                    &.on {
+                        span {
+                            background-color: transparent;
+                        }
+                    }
+                }
+
+                .b-brand .b-title {
+                    color: $header-light-text-color;
+                    transform: rotateY(0deg);
+                    opacity: 1;
+                }
+            }
+
+            .pcoded-inner-navbar {
+                > li {
+                    &.active,
+                    &.pcoded-trigger {
+                        > a {
+                            background: transparent;
+                        }
+
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            &.mob-open,
+            &.navbar-collapsed:hover {
+                ~.pcoded-header,
+                ~.pcoded-main-container {
+                    &:before {
+                        background: transparent;
+                    }
+                }
+            }
+
+            &.navbar-collapsed {
+                ~ .pcoded-main-container {
+                    margin-left: $Menu-collapsed-width + 25;
+                }
+            }
+
+            &.menu-light {
+                .navbar-content {
+                    background: $menu-light-background;
+                }
+            }
+            // menu background
+            @each $value in $color-menu-name {
+                $i: index($color-menu-name, $value);
+
+                &.navbar-#{$value} {
+                    .navbar-content {
+                        background: nth($color-menu-color,$i);
+                    }
+                }
+            }
+            // menu background gradient
+            @each $value in $color-menu-gradient-name {
+                $i: index($color-menu-gradient-name, $value);
+
+                &.navbar-gradient-#{$value} {
+                    .navbar-content {
+                        background: nth($color-menu-gradient-color,$i);
+                    }
+                }
+            }
+            // brand color
+            &[class*="brand-"]:not(.brand-default) {
+                .mobile-menu {
+                    span,
+                    span:after,
+                    span:before {
+                        background: #fff;
+                    }
+
+                    &.on span {
+                        background: transparent;
+                    }
+                }
+
+                .header-logo .b-brand .b-title {
+                    color: #fff;
+                }
+
+                .b-bg {
+                    background: #fff;
+                    color: nth($color-header-color,1);
+                }
+            }
+            @each $value in $color-header-name {
+                $i: index($color-header-name, $value);
+
+                &.brand-#{$value} .header-logo,
+                &.menu-light.brand-#{$value} .header-logo,
+                &[class*="navbar-"].brand-#{$value} .header-logo {
+                    background: nth($color-header-color,$i);
+                }
+            }
+            //  Menu background images
+            &[class*="navbar-image"] {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center bottom;
+
+                &:before {
+                    display: none;
+                }
+
+                .navbar-content .pcoded-inner-navbar {
+                    position: relative;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 0;
+                        background: rgba(0,0,0,0.7);
+                    }
+                }
+            }
+            $i: 1;
+            @while $i<=5 {
+                &.navbar-image-#{$i} {
+                    .navbar-content {
+                        background-image: url("../images/nav-bg/navbar-img-#{$i}.jpg");
+                    }
+                }
+                $i: $i+1;
+            }
+            // Menu background pattern
+            &[class*="navbar-pattern"] {
+                background-size: auto;
+                background-repeat: repeat;
+
+                &:before {
+                    display: none;
+                }
+
+                .pcoded-inner-navbar {
+                    position: relative;
+
+                    > li {
+                        &.active > a,
+                        &.pcoded-trigger > a {
+                            background: transparentize(darken($menu-dark-background,6%),.60);
+                        }
+                    }
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 0;
+                        background: rgba(0,0,0,0.1);
+                    }
+                }
+            }
+            $i: 1;
+            @while $i<=6 {
+                &.navbar-pattern-#{$i} {
+                    .navbar-content {
+                        background-image: url("../images/bg-images/#{$i}.jpg");
+                    }
+                }
+                $i: $i+1;
+            }
+        }
+    }
+}
+/* menu [ layout-11 ] css end */

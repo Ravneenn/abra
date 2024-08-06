@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+
+{% block js_files %}
+    
+{% endblock  %}
+
+
+
+
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static 'assets/plugins/data-tables/css/datatables.min.css' %}">
+<link rel="stylesheet" href=" {% static 'assets/plugins/modal-window-effects/css/md-modal.css' %} ">
+<link rel="stylesheet" href="{% static 'assets/plugins/data-tables/css/datatables.min.css' %}">
+
+{% endblock  %}
+
+    {% block content %}
+    <section class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ GEZGİN ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5 class="m-b-10">Genel Bakış</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href= {% url "home" %} ><i
+                                                        class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href= {% url "report_list" %} >Raporlar</a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- [ Main Content ] start -->
+                         <div class="card">
+                            <div class="card-content">
+                                <div class="row pr-4 pl-4 pt-3 pb-3">
+                                 
+                                        <div class="btn btn-primary start-create">Rapor Oluştur</div>
+                                    
+                                </div>
+                            </div>
+                         </div>
+                        {% if user.role.indexName == "yetkili" %}
+                        <div class="row reports-field-admin"></div>
+                        {% else %}
+                        <div class="row reports-field"></div>
+                        {% endif %}
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+ 
+
+    {% include "partials/reportList/modals/createReportModal.html" %}
+    {% include "partials/reportList/modals/updateReportModal.html" %}
+    {% include "partials/reportList/modals/deleteReportModal.html" %}
+    {% include "partials/reportList/modals/statusUpdateReportModal.html" %}
+    {% include "partials/workList/detailCreateModal.html" %}
+    <script src= " {% static "assets\js\myScript\reportList\reportList.js" %} "></script>   
+    <script src=" {% static 'assets/plugins/modal-window-effects/js/classie.js' %}"></script>
+    <script src=" {% static 'assets/plugins/modal-window-effects/js/modalEffects.js' %}"></script>
+    {% endblock  %}
+
+    
+
+
+    
+
+
+    

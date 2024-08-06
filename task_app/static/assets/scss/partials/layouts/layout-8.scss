@@ -1,0 +1,289 @@
+@import "../variables";
+/**  =====================
+     layout-8 css start
+==========================  **/
+/* menu[ layout-8 ] css start */
+
+body {
+    &.layout-8 {
+        .pcoded-header {
+            display: none;
+            @media only screen and (max-width: 991px) {
+                display: flex;
+
+                .collapse:not(.show) {
+                    display: flex;
+                    background: #fff;
+                }
+            }
+        }
+
+        .container {
+            @media (max-width: 575px) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        .pcoded-navbar.theme-horizontal {
+            top: 0;
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .navbar-content {
+                flex: 1 1 auto;
+            }
+
+            .header-logo {
+                display: inline-flex;
+                z-index: 1028;
+            }
+
+            ~ .pcoded-main-container {
+                margin-top: $header-height;
+            }
+
+            .navbar-wrapper {
+                display: flex;
+            }
+
+            .notification {
+                width: 350px;
+                padding: 0;
+                line-height: 1.4;
+                overflow: hidden;
+
+                a {
+                    color: $theme-font-color;
+
+                    &:hover {
+                        color: $theme-heading-color;
+                    }
+                }
+
+                .noti-head {
+                    background: $menu-dark-background;
+                    padding: 15px 20px;
+
+                    h6 {
+                        color: #fff;
+                    }
+
+                    a {
+                        color: #fff;
+                        text-decoration: underline;
+                        font-size: 13px;
+                    }
+                }
+
+                .noti-body {
+                    padding: 0;
+                    position: relative;
+                    height: 300px;
+                    width: 100%;
+
+                    img {
+                        width: 40px;
+                        margin-right: 20px;
+                    }
+
+                    li {
+                        padding: 15px 20px;
+                        transition: all 0.3s ease-in-out;
+
+                        &.n-title {
+                            padding-bottom: 0;
+
+                            p {
+                                margin-bottom: 5px;
+                            }
+                        }
+
+                        &.notification:hover {
+                            background: transparentize($primary-color,0.9);
+                        }
+
+                        p {
+                            margin-bottom: 5px;
+                            font-size: 13px;
+
+                            strong {
+                                color: #222;
+                            }
+                        }
+
+                        .n-time {
+                            font-size: 80%;
+                            float: right;
+                        }
+                    }
+                }
+
+                .noti-footer {
+                    border-top: 1px solid #f1f1f1;
+                    padding: 15px 20px;
+                    text-align: center;
+                    background: $theme-background;
+
+                    a {
+                        text-decoration: underline;
+                        font-size: 13px;
+                    }
+                }
+
+                ul {
+                    padding-left: 0;
+                    margin-bottom: 0;
+                    list-style: none;
+
+                    li {
+                        padding: 20px 15px;
+                    }
+                }
+            }
+
+            .profile-notification {
+                padding: 0;
+                line-height: 1.4;
+                overflow: hidden;
+                width: 290px;
+
+                .pro-head {
+                    color: #fff;
+                    border-radius: 0.25rem 0.25rem 0 0;
+                    padding: 15px;
+                    position: relative;
+                    background: $primary-color;
+
+                    img {
+                        width: 40px;
+                        margin-right: 10px;
+                    }
+
+                    .dud-logout {
+                        color: #fff;
+                        padding-right: 0;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        height: 100%;
+                        width: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                .pro-body {
+                    padding: 20px 0;
+                    margin-bottom: 0;
+                    list-style: none;
+
+                    li {
+                        a {
+                            color: $theme-font-color;
+                            font-size: 14px;
+                            padding: 10px 20px;
+
+                            i {
+                                margin-right: 10px;
+                            }
+                        }
+
+                        &.active,
+                        &:active,
+                        &:focus,
+                        &:hover {
+                            background: transparentize($primary-color,0.9);
+
+                            > a {
+                                background: transparent;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .navbar-nav {
+                width: $Menu-width;
+                z-index: 1029;
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-direction: row;
+
+                .dropdown-toggle {
+                    &:after {
+                        left: 0;
+                    }
+
+                    +.notification,
+                    +.profile-notification {
+                        position: absolute;
+                    }
+                }
+
+                .dropdown > a,
+                li > a {
+                    display: block;
+                    margin-right: 15px;
+                }
+
+                > li > a,
+                > li {
+                    line-height: $header-height;
+                }
+            }
+            // @media only screen and (max-width: 991px){
+            //
+            // }
+            &.menu-light {
+                .sidenav-horizontal {
+                    &:after,
+                    &:before {
+                        background: $menu-light-background;
+                    }
+                }
+
+                .header-logo {
+                    background: $menu-light-background;
+
+                    .b-title {
+                        color: $menu-light-text-color;
+                    }
+
+                    .mobile-menu {
+                        span {
+                            background-color: transparentize($menu-light-text-color,0.2);
+
+                            &:after,
+                            &:before {
+                                background-color: transparentize($menu-light-text-color,0.2);
+                            }
+                        }
+
+                        &:hover {
+                            span {
+                                background-color: $menu-light-text-color;
+
+                                &:after,
+                                &:before {
+                                    background-color: $menu-light-text-color;
+                                }
+                            }
+                        }
+
+                        &.on {
+                            span {
+                                background-color: transparent;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-8 ] css end */

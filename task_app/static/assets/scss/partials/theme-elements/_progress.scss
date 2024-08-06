@@ -1,0 +1,32 @@
+/**  =====================
+      Progress css start
+==========================  **/
+.progress {
+    overflow: visible;
+    --bs-progress-border-radius : 0;
+    .progress-bar {
+      border-radius: $progress-border-radius;
+    }
+  }
+  .progress-stacked {
+    overflow: hidden;
+    .progress:not(:first-child) {
+      .progress-bar {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    .progress:not(:last-child) {
+      .progress-bar {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+@each $color, $value in $theme-colors {
+    .bg-#{$color}-progress {
+        background-color: $value;
+    }
+  }
+
+/**====== Progress css end ======**/

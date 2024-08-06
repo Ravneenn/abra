@@ -1,0 +1,150 @@
+<form action="{% url 'create_work_ajax'%}" id="crateForm" enctype="multipart/form-data" method="post">
+    {% csrf_token %}  
+    <div class="md-modal modal-xl md-effect-16" id="modal-16">
+        <div class= "card mb-0">
+            <h3 class="card-header bg-success label-info">Görev Oluştur</h3>
+        </div>
+        <div class="md-content scrollable-modal-content">
+                <div class="row custom-color mb-auto">
+                    <div class="col-sm-6 ">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="alert alert-primary">
+                                    <div class="media align-items-center d-flex">
+                                        <i class="feather icon-alert-circle h2 mb-0"></i>
+                                        <div class="media-body ms-3"> Basic HTML form components with custom
+                                            style. </div>
+                                    </div>
+                                </div>
+                                <!--Görev Adı-->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Görev Adı</label>
+                                    <input class="form-control" type="text" placeholder= "Görev Adı"
+                                        id="name" name="name" value="{{ form.name.value|default_if_none:'' }}">
+                                        {% if form.name.errors %}
+                                        <div class="text-danger">
+                                            {{ form.name.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <!--Görev Açıklaması-->
+                                <div class="mb-3">
+                                    <label class="form-label" for="description">Görev Açıklaması</label>
+                                    <textarea class="form-control" id="description" name="description" value="{{ form.description.value|default_if_none:'' }}" rows="6" placeholder="Görevi bu alanda açıklayınız..."></textarea>
+                                    {% if form.description.errors %}
+                                        <div class="text-danger">
+                                            {{ form.description.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!--Dosya Yükleme-->
+
+                                <div class="mb-3">
+                                    <label for="img" class="form-label">Dosyalar</label>
+                                    <input class="form-control" type="file" id="img" name="img" value="{{ form.img.value|default_if_none:'' }}" multiple>
+                                    {% if form.img.errors %}
+                                        <div class="text-danger">
+                                            {{ form.img.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <small>Birden fazla dosya seçilebilir.</small>
+                                </div>
+
+                                <!--Teslim Tarihi-->
+                                <div class="mb-5">
+                                    <label for="deadline" class="form-label">Son Teslim</label>
+                                    <input class="form-control" type="date" value="{{ form.deadline.value|default_if_none:'' }}"
+                                        id="deadline" name="deadline">
+                                        {% if form.deadline.errors %}
+                                        <div class="text-danger">
+                                            {{ form.deadline.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <!--Bağlantılı İşler-->
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="relatedWork">Bağlantılı işler</label>
+                                    <select class="form-select form-select-lg"  id="relatedWork" name="relatedWork" value="{{ form.relatedWork.value|default_if_none:'' }}"> 
+                                        <option  value="" > None </option> 
+                                        {% for work in works %}
+                                            {% if work.relatedWork == None %}
+                                                    <option value= "{{work.id}}"> {{work}} </option> 
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.relatedWork.errors %}
+                                        <div class="text-danger">
+                                            {{ form.relatedWork.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <!--Personel Seçim-->
+
+                                <div class="mb-4">
+                                    <label class="form-label" for="appointed">Görevli Personeller</label>
+                                    <select multiple class="form-select" id="appointed" name="appointed" size="8">
+                                        {% for staff in staffs %}
+                                            {% if staff != user %} <option value="{{ staff.id }}" class="shadow-sm p-3 mb-1 bg-white rounded">{{ staff }}</option> {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.appointed.errors %}
+                                        <div class="text-danger">
+                                            {{ form.appointed.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <small>Çoklu seçim için SHIFT'e basılı tıt veya CTRL ile seç.</small>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- [ form-element ] end -->
+                    </div>
+                    <!-- [ form-element ] end -->
+                </div>
+        </div>
+        <div class="card">
+            <div class="modal-footer card-footer">
+                <button type="submit" class="btn btn-success me-2">Görev Oluştur</button>
+                <button type="reset" class="btn btn-light">Formu temizle</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Başarılı</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Görev başarıylalar oluşturuldu!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="successModalCloseBtn" data-dismiss="modal">Tamam</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

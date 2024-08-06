@@ -1,0 +1,192 @@
+@import "../variables";
+/**  =====================
+     layout-9 css start
+==========================  **/
+/* menu[ layout-9 ] css start */
+body {
+    &.layout-9 {
+        background: #ecf4fb;
+
+        .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .pcoded-navbar.theme-horizontal {
+            left: 0;
+            right: 0;
+            padding-left: 0;
+            padding-right: 0;
+            position: absolute;
+            top: -#{$header-height*2-20px};
+            box-shadow: none;
+            background-color: transparent;
+
+            .navbar-content {
+                box-shadow: none;
+            }
+
+            .pcoded-inner-navbar {
+                > li {
+                    &:last-child > a {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .sidenav-horizontal-next,
+            .sidenav-horizontal-prev {
+                display: none;
+            }
+
+            .sidenav-horizontal {
+                &:after,
+                &:before {
+                    display: none;
+                }
+            }
+
+            ~.pcoded-header {
+                left: 0;
+                right: 0;
+                margin-left: auto;
+
+                .m-header {
+                    padding-left: 0;
+                }
+            }
+
+            ~ .pcoded-main-container {
+                margin-top: $header-height*3+30;
+
+                .pcoded-wrapper {
+                    background: #fff;
+                }
+            }
+
+            &.top-nav-collapse {
+                ~.pcoded-header {
+                    min-height: 55px;
+
+                    .dropdown .dropdown-toggle,
+                    .navbar-nav > li {
+                        line-height: 55px;
+                    }
+                }
+            }
+
+            .layout9-nav {
+                width: 100%;
+            }
+
+            .sidemenu {
+                li {
+                    display: inline-block;
+
+                    a {
+                        padding: 15px 25px;
+                        border-radius: 5px 5px 0 0;
+                        color: $menu-light-text-color;
+                        background: transparentize($menu-dark-background, 0.85);
+                        margin-right: 4px;
+                        cursor: pointer;
+
+                        i {
+                            display: none;
+                        }
+                    }
+
+                    &:last-child {
+                        a {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &.active {
+                        a {
+                            background: $menu-dark-background;
+                            color: $menu-dark-text-color;
+                        }
+                    }
+                }
+            }
+
+            &.l9-full-menu {
+                .sidemenu {
+                    li {
+                        flex: 1 1 auto;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .side-content {
+                width: 100%;
+                background: $menu-dark-background;
+                box-shadow: 0 4px 2px -3px rgba(69,90,100,0.09);
+                height: $header-height;
+                display: flex;
+                align-items: center;
+            }
+
+            .sidelink {
+                display: none;
+
+                &.active {
+                    display: inline-block;
+                }
+            }
+
+            &.menu-light {
+                .sidemenu {
+                    li {
+                        a {
+                            background: transparentize($menu-dark-background, 0.95);
+                        }
+
+                        &.active {
+                            a {
+                                background: $menu-light-background;
+                                color: $menu-light-text-color;
+                            }
+                        }
+                    }
+                }
+
+                .side-content {
+                    background: $menu-light-background;
+                    box-shadow: 0 4px 2px -3px rgba(69,90,100,0.09);
+                    height: $header-height;
+                }
+            }
+        }
+        @media only screen and (max-width: 991px) {
+            .pcoded-navbar {
+                padding: 0;
+                height: auto;
+                min-height: 100%;
+
+                .navbar-content,
+                .navbar-wrapper {
+                    height: auto;
+                    min-width: 100%;
+                }
+
+                &.mob-open,
+                &.navbar-collapsed:hover {
+                    ~ .pcoded-header,
+                    ~ .pcoded-main-container {
+                        &:before {
+                            background: transparent;
+                        }
+                    }
+                }
+
+                .sidemenu {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-9 ] css end */

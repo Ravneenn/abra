@@ -1,0 +1,93 @@
+@import "../variables";
+/**  =====================
+     layout-2 css start
+==========================  **/
+/* menu[ layout-2 ] css start */
+
+body {
+    &.layout-2 {
+        .pcoded-navbar {
+            a {
+                color: rgba(255,255,255,0.85);
+            }
+
+            .pcoded-submenu {
+                background-color: rgba(0,0,0,0.05);
+
+                .pcoded-submenu {
+                    background-color: transparent;
+                }
+            }
+
+            &.navbar-collapsed {
+                .pcoded-inner-navbar > li.pcoded-trigger .pcoded-submenu:after {
+                    display: none;
+                }
+
+                &:hover {
+                    .pcoded-inner-navbar > li > a > .pcoded-micon + .pcoded-mtext {
+                        top: 25px;
+                    }
+
+                    .pcoded-inner-navbar > li.pcoded-trigger .pcoded-submenu li a {
+                        color: rgba(255,255,255,0.85);
+                    }
+                }
+            }
+
+            .pcoded-inner-navbar {
+                .pcoded-menu-caption {
+                    display: none;
+                }
+
+                > li {
+                    > a {
+                        padding: 20px 15px 20px 20px;
+                        margin-top: 0;
+                        border-bottom: 1px solid rgba(0,0,0,0.08);
+                    }
+
+                    &.pcoded-hasmenu > a:after {
+                        top: 25px;
+                    }
+
+                    &.active,
+                    &.pcoded-trigger {
+                        &:after {
+                            display: none;
+                        }
+
+                        > a {
+                            background-color: rgba(0,0,0,0.08);
+                        }
+                    }
+                }
+
+                li {
+                    &.active,
+                    &:focus,
+                    &:hover {
+                        > a {
+                            color: #fff;
+                        }
+                    }
+
+                    .pcoded-submenu {
+                        > li {
+                            &.active,
+                            &:focus,
+                            &:hover {
+                                > a {
+                                    &:before {
+                                        background: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-2 ] css end */

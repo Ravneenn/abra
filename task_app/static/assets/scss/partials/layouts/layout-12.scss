@@ -1,0 +1,144 @@
+@import "../variables";
+/**  =====================
+     layout-12 css start
+==========================  **/
+/* menu[ layout-12 ] css start */
+body {
+    &.layout-12 {
+        .pcoded-navbar {
+            @media only screen and (min-width: 992px) {
+                background: #fff;
+                box-shadow: inset 0 1px 20px 0 rgba(63, 77, 103, 0.15);
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    background: transparentize($primary-color,0.9);
+                }
+
+                .navbar-content {
+                    box-shadow: none;
+                }
+
+                .pcoded-inner-navbar {
+                    .pcoded-submenu {
+                        background: transparent;
+                    }
+
+                    > li {
+                        &.active,
+                        &.pcoded-trigger {
+                            > a {
+                                background: transparent;
+                            }
+
+                            &:after {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                ~ .pcoded-main-container {
+                    box-shadow: -20px 0 20px -20px rgba(204, 205, 206, 0.4);
+                    background: #fff;
+                }
+
+                &.mob-open,
+                &.navbar-collapsed:hover {
+                    ~.pcoded-header,
+                    ~.pcoded-main-container {
+                        margin-left: $Menu-width;
+
+                        &:before {
+                            background: transparent;
+                        }
+                    }
+
+                    ~.pcoded-header {
+                        width: calc(100% - #{$Menu-width});
+                    }
+                }
+            }
+
+            .header-logo {
+                margin-right: 0;
+                background: transparent;
+                box-shadow: none;
+
+                .mobile-menu {
+                    span {
+                        background-color: transparentize($header-light-text-color,0.2);
+
+                        &:after,
+                        &:before {
+                            background-color: transparentize($header-light-text-color,0.2);
+                        }
+                    }
+
+                    &:hover {
+                        span {
+                            background-color: $header-light-text-color;
+
+                            &:after,
+                            &:before {
+                                background-color: $header-light-text-color;
+                            }
+                        }
+                    }
+
+                    &.on {
+                        span {
+                            background-color: transparent;
+                        }
+                    }
+                }
+
+                .b-brand .b-title {
+                    color: $header-light-text-color;
+                }
+            }
+            // brand color
+            &[class*="brand-"]:not(.brand-default) {
+                .mobile-menu {
+                    span,
+                    span:after,
+                    span:before {
+                        background: #fff;
+                    }
+
+                    &.on span {
+                        background: transparent;
+                    }
+                }
+
+                .header-logo .b-brand .b-title {
+                    color: #fff;
+                }
+
+                .b-bg {
+                    background: #fff;
+                    color: nth($color-header-color,1);
+                }
+            }
+            @each $value in $color-header-name {
+                $i: index($color-header-name, $value);
+
+                &.brand-#{$value} .header-logo,
+                &.menu-light.brand-#{$value} .header-logo,
+                &[class*="navbar-"].brand-#{$value} .header-logo {
+                    background: nth($color-header-color,$i);
+                }
+
+                &.brand-#{$value}:before {
+                    background: transparentize(nth($color-header-color,$i),0.9);
+                }
+            }
+        }
+    }
+}
+/* menu [ layout-12 ] css end */

@@ -1,0 +1,89 @@
+@import "../variables";
+/**  =====================
+     layout-5 css start
+==========================  **/
+/* menu[ layout-5 ] css start */
+
+body {
+    &.layout-5 {
+        margin: 30px;
+        background: transparentize($primary-color, 0.8);
+
+        .pcoded-main-container {
+            background: $theme-background;
+            border-radius: 0 0 10px 0;
+            box-shadow: 1px 1px 0 0 darken($theme-border, 15%);
+        }
+
+        .pcoded-navbar {
+            border-radius: 10px 0 0 10px;
+
+            &[class*="navbar-image"]:before {
+                border-radius: 10px 0 0 10px;
+            }
+
+            .navbar-brand {
+                border-radius: 10px 0 0 0;
+            }
+
+            .pcoded-inner-navbar {
+                >li {
+
+                    &.active,
+                    &.pcoded-trigger {
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            &.mob-open,
+            &.navbar-collapsed:hover {
+
+                ~.pcoded-header,
+                ~.pcoded-main-container {
+                    &:before {
+                        background: transparent;
+                    }
+                }
+            }
+        }
+
+        .pcoded-header {
+            border-radius: 0 10px 0 0;
+            box-shadow: 0 1px 0 0 $theme-border, 1px -1px 0 0 darken($theme-border, 15%);
+        }
+
+        @media only screen and (max-width: 992px) {
+            .pcoded-header {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .pcoded-navbar {
+                margin-left: -$Menu-width - 30px;
+
+                &.mob-open {
+                    margin-left: 0;
+                }
+            }
+
+            .pcoded-main-container {
+                box-shadow: 1px 1px 0 0 $theme-border, -1px 0 0 0 $theme-border;
+            }
+        }
+
+        @media only screen and (max-width: 575px) {
+            margin: 0;
+
+            .navbar-brand,
+            .pcoded-header,
+            .pcoded-main-container,
+            .pcoded-navbar {
+                border-radius: 0;
+            }
+        }
+    }
+}
+
+/* menu [ layout-5 ] css end */
